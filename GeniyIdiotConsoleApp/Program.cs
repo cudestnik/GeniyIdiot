@@ -16,17 +16,39 @@ namespace GeniyIdiotConsoleApp
                 return questions;
         }
 
-        static void Main(string[] args)
+        static int[] GetAnswers(int countAnswers) 
         {
-            int countQuestions = 5;
-            string[] questions = GetQuestions(countQuestions);
-            int[] answers = new int[countQuestions];
+            int[] answers = new int[countAnswers];
 
             answers[0] = 6;
             answers[1] = 9;
             answers[2] = 25;
             answers[3] = 60;
             answers[4] = 2;
+            return answers;
+
+        }
+        static string[] GetDiagnoses(int countDiagnoses)
+        {
+            string[] diagnoses = new string[countDiagnoses];
+            diagnoses[0] = "Идиот";
+            diagnoses[1] = "Кретин";
+            diagnoses[2] = "Дурак";
+            diagnoses[3] = "Нормальный";
+            diagnoses[4] = "Талант";
+            diagnoses[5] = "Гений";
+            return diagnoses;
+        }
+
+        static void Main(string[] args)
+        {
+            int countDiagnoses = 6;
+            int countQuestions = 5;
+            string[] questions = GetQuestions(countQuestions);
+            string[] diagnoses = GetDiagnoses(countDiagnoses);
+            int countAnswers = 5;
+            int[] answers = GetAnswers(countAnswers);
+
 
             int CountRightAnswers = 0;
 
@@ -90,13 +112,7 @@ namespace GeniyIdiotConsoleApp
             }
            */
 
-            string[] diagnoses = new string[6];
-            diagnoses[0] = "Идиот";
-            diagnoses[1] = "Кретин";
-            diagnoses[2] = "Дурак";
-            diagnoses[3] = "Нормальный";
-            diagnoses[4] = "Талант";
-            diagnoses[5] = "Гений";
+           
 
             Console.WriteLine("Ваш диагноз: " + diagnoses[CountRightAnswers]);
         }
