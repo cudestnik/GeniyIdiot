@@ -52,13 +52,17 @@ namespace GeniyIdiotConsoleApp
 
             int CountRightAnswers = 0;
 
-            Random random = new Random();
+            Random rand = new Random();
 
             for(int i = 0; i < countQuestions ; i++) 
             {
                 Console.WriteLine("Вопрос N" + (i+1));
 
-                int randomQuestionIndex = random.Next(0, countQuestions);
+                int randomQuestionIndex = rand.Next(0, countQuestions);
+               
+               
+            
+            
                 Console.WriteLine(questions[randomQuestionIndex]);
 
                 int userAnswer = Convert.ToInt32(Console.ReadLine());
