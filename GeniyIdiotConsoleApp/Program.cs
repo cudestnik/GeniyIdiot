@@ -4,6 +4,89 @@ namespace GeniyIdiotConsoleApp
 {
     class Program
     {  
+        static void Main(string[] args)
+        {
+            while (true)
+            {
+                Console.WriteLine("Привет! Как Вас зовут? ");
+                string username = Console.ReadLine();
+
+                int countDiagnoses = 6;
+                int countQuestions = 5;
+                string[] questions = GetQuestions(countQuestions);
+                string[] diagnoses = GetDiagnoses(countDiagnoses);
+                int countAnswers = 5;
+                int[] answers = GetAnswers(countAnswers);
+
+
+                int CountRightAnswers = 0;
+
+                Random random = new Random();
+
+                for (int i = countQuestions - 1; i >= 1; i--)
+                {
+                    int index = random.Next(0, i);
+
+                    string tempQuestions = questions[index];
+                    questions[index] = questions[i];
+                    questions[i] = tempQuestions;
+
+                    int tempAnswer = answers[index];
+                    answers[index] = answers[i];
+                    answers[i] = tempAnswer;
+
+                }
+                for (int i = 0; i < countQuestions; i++)
+                {
+                    Console.WriteLine("Вопрос N" + (i + 1));
+
+                    Console.WriteLine(questions[i]);
+
+                    int userAnswer = Convert.ToInt32(Console.ReadLine());
+
+                    int rightAnswer = answers[i];
+
+                    if (userAnswer == rightAnswer)
+                    {
+                        CountRightAnswers++;
+                    }
+                }
+
+                Console.WriteLine("Количество правильных ответов: " + CountRightAnswers);
+
+                Console.WriteLine(username + " , Ваш диагноз: " + diagnoses[CountRightAnswers]);
+
+                bool userChoice = GetUserShoice("Хотите начать сначала?");
+                
+                if(userChoice == false)
+                {
+                    break;
+                }
+            }
+        }
+        static bool GetUserShoice(string message)
+        {
+
+            while (true)
+            {
+
+
+                Console.WriteLine(message + "Введите Да или Нет. ");
+                string userInput = Console.ReadLine();
+
+                if (userInput.ToLower() == "нет")
+                {
+                    return false;
+
+                }
+                if (userInput.ToLower() == "да")
+                {
+                    return true;
+                }
+
+            }
+        }
+
         static string[] GetQuestions(int countQuestions)
         {
             string[] questions = new string[countQuestions];
@@ -13,10 +96,10 @@ namespace GeniyIdiotConsoleApp
             questions[2] = "На двух руках 10 пальцев.Сколько пальцев на 5 руках?";
             questions[3] = "Укол делают каждые полчаса,сколько нужно минут для трёх уколов?";
             questions[4] = "Пять свечей горело,две потухли.Сколько осталось?";
-                return questions;
+            return questions;
         }
 
-        static int[] GetAnswers(int countAnswers) 
+        static int[] GetAnswers(int countAnswers)
         {
             int[] answers = new int[countAnswers];
 
@@ -28,6 +111,9 @@ namespace GeniyIdiotConsoleApp
             return answers;
 
         }
+        
+
+
         static string[] GetDiagnoses(int countDiagnoses)
         {
             string[] diagnoses = new string[countDiagnoses];
@@ -40,85 +126,7 @@ namespace GeniyIdiotConsoleApp
             return diagnoses;
         }
 
-        static void Main(string[] args)
-        {
-            int countDiagnoses = 6;
-            int countQuestions = 5;
-            string[] questions = GetQuestions(countQuestions);
-            string[] diagnoses = GetDiagnoses(countDiagnoses);
-            int countAnswers = 5;
-            int[] answers = GetAnswers(countAnswers);
 
-
-            int CountRightAnswers = 0;
-
-            Random rand = new Random();
-
-            for(int i = 0; i < countQuestions ; i++) 
-            {
-                Console.WriteLine("Вопрос N" + (i+1));
-
-                int randomQuestionIndex = rand.Next(0, countQuestions);
-               
-               
-            
-            
-                Console.WriteLine(questions[randomQuestionIndex]);
-
-                int userAnswer = Convert.ToInt32(Console.ReadLine());
-
-                int rightAnswer = answers[randomQuestionIndex];
-              
-
-                if(userAnswer == rightAnswer)
-                {
-                    CountRightAnswers++;
-                }               
-            }
-
-            Console.WriteLine("Количество правильных ответов: " + CountRightAnswers);
-
-            /*string diagnose = "";
-
-            if(CountRightAnswers == 0) 
-            { 
-                diagnose = "Идиот";
-            }
-            if (CountRightAnswers == 1)
-            {
-                diagnose = "Кретин";
-            }
-            if (CountRightAnswers == 2) // Или эта конструкция или switch но она красивее и короче
-            {
-                diagnose = "Дурак";
-            }
-            if (CountRightAnswers == 3)
-            {
-                diagnose = "Нормальный";
-            }
-            if (CountRightAnswers == 4)
-            {
-                diagnose = "Талант";
-            }
-            if (CountRightAnswers == 5)
-            {
-                diagnose = "Гений";
-            }*/
-           /* switch(CountRightAnswers)
-            {
-                case 0: diagnose = "Идиот";break;
-                case 1: diagnose = "Кретин";break;
-                case 2: diagnose = "Дурак";break;           // вместо него заменили на массив diagnoses
-                case 3: diagnose = "Нормальный";break;
-                case 4: diagnose = "Талант";break;
-                case 5: diagnose = "Гений";break;
-
-            }
-           */
-
-           
-
-            Console.WriteLine("Ваш диагноз: " + diagnoses[CountRightAnswers]);
-        }
     }
+
 }
