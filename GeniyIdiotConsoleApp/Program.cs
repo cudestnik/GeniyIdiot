@@ -39,6 +39,7 @@ namespace GeniyIdiotConsoleApp
             diagnoses[5] = "Гений";
             return diagnoses;
         }
+       
 
         static void Main(string[] args)
         {
@@ -53,16 +54,25 @@ namespace GeniyIdiotConsoleApp
             int CountRightAnswers = 0;
 
             Random rand = new Random();
+         
+            for (int i=0; i < countQuestions; i++)
+            {              
+               int j =rand.Next(i+1);
+                var temp = questions[i];
+                questions[i] = questions[j];
+                questions[j] = temp;
+                
+            }
 
             for(int i = 0; i < countQuestions ; i++) 
             {
-                Console.WriteLine("Вопрос N" + (i+1));
+
+
+               Console.WriteLine("Вопрос N" + (i + 1));
 
                 int randomQuestionIndex = rand.Next(0, countQuestions);
-               
-               
-            
-            
+
+
                 Console.WriteLine(questions[randomQuestionIndex]);
 
                 int userAnswer = Convert.ToInt32(Console.ReadLine());
@@ -119,6 +129,9 @@ namespace GeniyIdiotConsoleApp
            
 
             Console.WriteLine("Ваш диагноз: " + diagnoses[CountRightAnswers]);
+           
         }
+
+
     }
 }
